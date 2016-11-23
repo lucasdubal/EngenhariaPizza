@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Bebida;
 import modelo.Cliente;
 import modelo.Pedido;
 import modelo.Pizza;
@@ -38,12 +39,14 @@ public class ClientePadraoDAO {
                             verifica = rs.getInt(1);
                         }
                         if (verifica < 10){
-                            this.query = this.con.prepareStatement("insert into pedido(idcliente,total,tamanhoPizza,pizzaSabor,tipo) values (?,?,?,?,?)");
+                            this.query = this.con.prepareStatement("insert into pedido(idcliente,total,tamanhoPizza,pizzaSabor,tipo,bebidaNome, bebidaTipo) values (?,?,?,?,?,?,?)");
                             this.query.setString(1,"1");
                             this.query.setString(2, String.valueOf(p.getTotal()));
                             this.query.setString(3, p.getPizza().getTamanho());
                             this.query.setString(4, p.getPizza().getNome());
-                            this.query.setInt(5, 1);
+                            this.query.setString(5, "p");
+                            this.query.setString(6, p.getSoda().getNome());
+                            this.query.setString(7, p.getSoda().getTipo());
                             this.query.executeUpdate();
                             this.query.close();
                             mensagem = "Inserido";}
@@ -76,8 +79,12 @@ public class ClientePadraoDAO {
                 pedido.setTotal(rs.getFloat(3));
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt(2));
-                cliente.setTipo(rs.getInt(6));
+                cliente.setTipo(rs.getString(6));
                 pedido.setCliente(cliente);
+                Bebida bebida = new Bebida();
+                bebida.setNome(rs.getString(7));
+                bebida.setTipo(rs.getString(8));
+                pedido.setSoda(bebida);
                 lista.add(pedido);
             }
            
@@ -96,10 +103,8 @@ public class ClientePadraoDAO {
         try {
             
             this.con = DriverManager.getConnection("jdbc:mysql://localhost/webentrega","root","");
-            //System.out.println("oLA1");
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select * from pedido order by total");
-            //System.out.println("Ola2");
+            ResultSet rs = stm.executeQuery("Select * from pedido order by tipo");
             while(rs.next()) {
                 Pizza pizza = new Pizza();
                 Pedido pedido = new Pedido();
@@ -110,12 +115,15 @@ public class ClientePadraoDAO {
                 pedido.setTotal(rs.getFloat(3));
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt(2));
-                cliente.setTipo(rs.getInt(6));
+                cliente.setTipo(rs.getString(6));
                 pedido.setCliente(cliente);
+                Bebida bebida = new Bebida();
+                bebida.setNome(rs.getString(7));
+                bebida.setTipo(rs.getString(8));
+                pedido.setSoda(bebida);
                 lista.add(pedido);
                 
             }
-            //System.out.println("ola3");
            
             this.con.close();
             stm.close();
