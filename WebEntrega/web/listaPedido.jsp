@@ -20,6 +20,8 @@
                                 <td>Id Cliente</td>
 				<td>Sabor da Pizza</td>
 				<td>Tamanho</td>
+                                <td>Bebida</td>
+                                <td>Tipo Bebida</td>
                                 <td>Total</td>
                                 <td>Status</td>
                                 <td>Tipo</td>
@@ -31,6 +33,8 @@
                 <td><%=p.getCliente().getIdCliente()%></td>
                 <td><%=p.getPizza().getNome()%></td>
                 <td><%=p.getPizza().getTamanho()%></td>
+                <td><%=p.getSoda().getNome()%></td>
+                <td><%=p.getSoda().getTipo()%></td>
                 <td><%=p.getTotal()%></td>
                 <td><%=p.getStatus()%></td>
                 <td><%=p.getCliente().getTipo()%></td>
@@ -48,6 +52,8 @@
                                 <td>Id Cliente</td>
 				<td>Sabor da Pizza</td>
 				<td>Tamanho</td>
+                                <td>Bebida</td>
+                                <td>Tipo Bebida</td>
                                 <td>Total</td>
                                 <td>Status</td>
                                 <td>Tipo</td>
@@ -59,6 +65,8 @@
                 <td><%=p.getCliente().getIdCliente()%></td>
                 <td><%=p.getPizza().getNome()%></td>
                 <td><%=p.getPizza().getTamanho()%></td>
+                <td><%=p.getSoda().getNome()%></td>
+                <td><%=p.getSoda().getTipo()%></td>
                 <td><%=p.getTotal()%></td>
                 <td><%=p.getStatus()%></td>
                 <td><%=p.getCliente().getTipo()%></td>
