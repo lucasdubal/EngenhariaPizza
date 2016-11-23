@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Bebida;
+import modelo.Cliente;
 import modelo.Pedido;
 import modelo.Pizza;
 
@@ -44,29 +45,35 @@ public class ClienteVip extends HttpServlet {
             throws ServletException, IOException, SQLException {
         
         
-        //response.setContentType("text/html;charset=UTF-8");
         String nomep = request.getParameter("pizza");
 	String tamanhop = request.getParameter("tamanho");
         String nomeb = request.getParameter("bebida");
 	String tipob = request.getParameter("tipobebida");
+        String insere = null;
         Pizza pizza = new Pizza();
         pizza.setTamanho(tamanhop);
         pizza.setNome(nomep);
         Pedido p = new Pedido();
         Bebida b = new Bebida();
-        b.setNome(nomeb);
-        b.setTipo(tipob);
-        
+        Cliente c = new Cliente();
+        c.setTipo("v");
+        p.setCliente(c);
         
         String acao = request.getParameter("escolha");
         
         if (acao.equalsIgnoreCase("Escolher")){
             if (tipob.equalsIgnoreCase("lata")){
-            b.setPreco((float) 3.50);
+                b.setPreco((float) 3.50);
+                b.setNome(nomeb);
+                b.setTipo(tipob);
         } else if (tipob.equalsIgnoreCase("2l")){
             b.setPreco((float)6.0);
-        } else
+            b.setNome(nomeb);
+            b.setTipo(tipob);
+        } else{
             b.setPreco(0);
+            b.setNome("Nenhuma");
+            b.setTipo("Nenhum");}
         if (tamanhop.equals("pequena")){
             pizza.setPreco(22);
         } else if (tamanhop.equalsIgnoreCase("media")){
@@ -78,23 +85,38 @@ public class ClienteVip extends HttpServlet {
         p.setTotal(pizza.getPreco() + b.getPreco());
         try {
             ClienteVipDAO dao = new ClienteVipDAO();
-            dao.InserePedidoVIP(p);
-            request.setAttribute("tipo", 2);
-            String destino = "usuarioVip.jsp";
+            insere = dao.InserePedidoVIP(p);
+            String destino = "cardapio.jsp?msn="+insere;
             RequestDispatcher rd = request.getRequestDispatcher(destino);
             rd.forward(request, response);
         } catch (Exception e) {
-            System.out.println("Deu erro:"+e);
+            System.out.println("Deu erro no Servlet:"+e);
         }
         } else if (acao.equalsIgnoreCase("Listar")){
             List<Pedido> listapedido = new ArrayList<Pedido>();
+            try{
             ClientePadraoDAO dao = new ClientePadraoDAO();
             listapedido = dao.listaPedido();
             request.setAttribute("pedido", listapedido);
-            String destino = "listaPedido.jsp";
+            String destino = "listaPedido.jsp?flag="+1;
+            RequestDispatcher rd = request.getRequestDispatcher(destino);
+            rd.forward(request, response);
+            } catch (Exception e) {
+            System.out.println("Deu erro ao listar:"+e);} 
+        } else if (acao.equalsIgnoreCase("Status")){
+            String status;
+            ClienteVipDAO vip = new ClienteVipDAO();
+
+        }  else if (acao.equalsIgnoreCase("Preferenciar Vips")){
+            List<Pedido> listapedido = new ArrayList<Pedido>();
+            ClientePadraoDAO dao = new ClientePadraoDAO();
+            listapedido = dao.preferenciarVip();
+            request.setAttribute("pedido", listapedido);
+            String destino = "listaPedido.jsp?flag="+2;
             RequestDispatcher rd = request.getRequestDispatcher(destino);
             rd.forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
