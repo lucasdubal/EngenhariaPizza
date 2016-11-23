@@ -29,25 +29,36 @@ public class ClienteVipDAO {
 		}
 	}
     
-    public void InserePedidoVIP(Pedido p) {
-		try {
-			this.con = DriverManager.getConnection("jdbc:mysql://localhost/webentrega","root","");
-                        this.query = this.con.prepareStatement("insert into pedido(idcliente,total,tamanhoPizza,pizzaSabor,tipo) values (?,?,?,?,?)");
-			this.query.setString(1,"2");
-			this.query.setString(2, String.valueOf(p.getTotal()));
-                        this.query.setString(3, p.getPizza().getTamanho());
-                        this.query.setString(4, p.getPizza().getNome());
-                        this.query.setInt(5, 2);
-                        this.query.executeUpdate();
-                        Cliente c = new Cliente();
-                        c.setTipo(2);
-                        p.setCliente(c);
-                        this.query.close();
-			this.con.close();
-                        
+    public String InserePedidoVIP(Pedido p) {
+        int verifica=0;
+        String mensagem=null;
+            try {
+                this.con = DriverManager.getConnection("jdbc:mysql://localhost/webentrega","root","");
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("Select count(idpedido) from pedido");
+                while (rs.next()){
+                    verifica = rs.getInt(1);
+                        }
+                        if (verifica < 10){
+                            this.query = this.con.prepareStatement("insert into pedido(idcliente,total,tamanhoPizza,pizzaSabor,tipo,bebidaNome, bebidaTipo) values (?,?,?,?,?,?,?)");
+                            this.query.setString(1,"2");
+                            this.query.setString(2, String.valueOf(p.getTotal()));
+                            this.query.setString(3, p.getPizza().getTamanho());
+                            this.query.setString(4, p.getPizza().getNome());
+                            this.query.setString(5, p.getCliente().getTipo());
+                            this.query.setString(6, p.getSoda().getNome());
+                            this.query.setString(7, p.getSoda().getTipo());
+                            this.query.executeUpdate();
+                            this.query.close();
+                            mensagem = "Inserido";}
+                        else {
+                            mensagem = "Lista de pedidos está cheia";
+                        }
+			this.con.close();                   
 		} catch (Exception e) {
-			System.out.println("Nao rolou:"+e);
+			System.out.println("Nao rolou no DAO:"+e);
 		}
+                return mensagem;
 	}
      
     public String statusPedido(int tipo, Pedido p){
