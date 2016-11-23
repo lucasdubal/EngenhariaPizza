@@ -1,6 +1,6 @@
 <%-- 
-    Document   : usuarioVip
-    Created on : 03/11/2016, 10:20:00
+    Document   : cardapio
+    Created on : 11/10/2016, 10:58:31
     Author     : user
 --%>
 
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h3>Escolha da Pizza</h3>
         <form action="ClienteVip">
             <select name="tamanho">
                 <option value="pequena">Pekenina</option>
@@ -24,8 +25,30 @@
                 <option value="frango">Frango</option>
                 <option value="calabresa">Calabresa</option>
             </select>
-            <input type="submit" name="escolha" value="Escolher">
-            <input type="submit" name="escolha" value="Status do Pedido">
+        <h3>Escolha da Bebida</h3>
+        <select name="tipobebida">
+                <option value="selecionar">Selecionar</option>
+                <option value="lata">Lata</option>
+                <option value="2l">2 Litros</option>
+        </select>
+        <select name="bebida">
+                <option value="coca">Coca</option>
+                <option value="pepsi">Pepsi</option>
+                <option value="fanta">Fanta</option>
+                <option value="guarana">Guaraná</option>
+        </select>
+            <input name="escolha" type="submit" value="Escolher">
+            <input name="escolha" type="submit" value="Listar">
+            <input name="escolha" type="submit" value="Status">
         </form>
+        
+        <%
+            String mensagem = request.getParameter("msn");
+            if (mensagem != null){
+                out.print(mensagem);
+            }
+        %>
+        
+       
     </body>
 </html>
