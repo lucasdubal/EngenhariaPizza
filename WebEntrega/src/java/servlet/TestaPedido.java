@@ -62,21 +62,25 @@ public class TestaPedido extends HttpServlet {
         pizza.setNome(nomep);
         Pedido p = new Pedido();
         Bebida b = new Bebida();
-        b.setNome(nomeb);
-        b.setTipo(tipob);
         Cliente c = new Cliente();
-        c.setTipo(1);
+        c.setTipo("p");
         p.setCliente(c);
         
         String acao = request.getParameter("escolha");
         
         if (acao.equalsIgnoreCase("Escolher")){
             if (tipob.equalsIgnoreCase("lata")){
-            b.setPreco((float) 3.50);
+                b.setPreco((float) 3.50);
+                b.setNome(nomeb);
+                b.setTipo(tipob);
         } else if (tipob.equalsIgnoreCase("2l")){
             b.setPreco((float)6.0);
-        } else
+            b.setNome(nomeb);
+            b.setTipo(tipob);
+        } else{
             b.setPreco(0);
+            b.setNome("Nenhuma");
+            b.setTipo("Nenhum");}
         if (tamanhop.equals("pequena")){
             pizza.setPreco(22);
         } else if (tamanhop.equalsIgnoreCase("media")){
@@ -97,24 +101,31 @@ public class TestaPedido extends HttpServlet {
         }
         } else if (acao.equalsIgnoreCase("Listar")){
             List<Pedido> listapedido = new ArrayList<Pedido>();
+            try{
             ClientePadraoDAO dao = new ClientePadraoDAO();
             listapedido = dao.listaPedido();
             request.setAttribute("pedido", listapedido);
             String destino = "listaPedido.jsp?flag="+1;
             RequestDispatcher rd = request.getRequestDispatcher(destino);
             rd.forward(request, response);
+            } catch (Exception e) {
+                System.out.println("Deu erro ao listar:"+e);} 
         } else if (acao.equalsIgnoreCase("Status")){
             String status;
             ClienteVipDAO vip = new ClienteVipDAO();
 
         }  else if (acao.equalsIgnoreCase("Preferenciar Vips")){
             List<Pedido> listapedido = new ArrayList<Pedido>();
+            try{
             ClientePadraoDAO dao = new ClientePadraoDAO();
             listapedido = dao.preferenciarVip();
             request.setAttribute("pedido", listapedido);
             String destino = "listaPedido.jsp?flag="+2;
             RequestDispatcher rd = request.getRequestDispatcher(destino);
-            rd.forward(request, response);
+            rd.forward(request, response);}
+            catch (Exception e){
+                System.out.println("Deu erro ao preferenciar vips:"+e); 
+            }
         }
         
         
