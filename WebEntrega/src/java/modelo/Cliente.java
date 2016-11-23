@@ -10,10 +10,9 @@ package modelo;
  * @author leandro
  */
 public class Cliente {
-    private int idCliente, tipo;
-    private String nome, endereco, email, telefone;
+    private int idCliente;
+    private String nome, endereco, email, telefone, tipo;
     private Pedido pedido;
-
     
     
 // Métodos Getters e Setters
@@ -63,14 +62,17 @@ public void setTelefone(String tel){
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
