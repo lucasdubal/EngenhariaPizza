@@ -182,7 +182,8 @@
                 <div class="row">
                     <br>
                 
-                     <button type="button" name="escolha" class="btn btn-success">Finalizar Pedido</button>
+                    <button type="submit" name="escolha" class="btn btn-success" value="Finalizar Pedido">Finalizar Pedido</button>
+                         
                      
                 </div>
             </div>               
