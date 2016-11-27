@@ -46,10 +46,10 @@
             
         }
         
-        
+        label { color: whitesmoke; }
         
      body {
-    background-image: url("img/fundo-madeira.jpg");
+    background-image: url("img/madeira.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -141,15 +141,17 @@
        
             
         <div class="container" id="pedido">    
-          
+         <div class="col-md-5">   
         <h3>Escolha da Pizza</h3>
         <form action="TestaPedido">
             <select name="tamanho">
+                <option value="selecionar">Selecionar</option>
                 <option value="pequena">Pekenina</option>
                 <option value="media">Mediazita</option>
                 <option value="grande">Gigante</option>
             </select>
             <select name="pizza">
+                <option value="selecionar">Selecionar</option>
                 <option value="palmito">Palmito</option>
                 <option value="4queijos">4 Queijos</option>
                 <option value="frango">Frango</option>
@@ -163,28 +165,38 @@
                 <option value="2l">2 Litros</option>
         </select>
         <select name="bebida">
+                <option value="coca">Selecionar</option>
                 <option value="coca">Coca</option>
                 <option value="pepsi">Pepsi</option>
                 <option value="fanta">Fanta</option>
                 <option value="guarana">Guaraná</option>
         </select>
-       
+        <h3>Forma de pagamento</h3>
+       <div class="radio">
+      <label><input type="radio" name="optradio">PagSeguro</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio">Presencial</label>
+    </div>
             <div class="container">
                 <div class="row">
                     <br>
                 
-
-                     <input  type="button" name="escolha"  value="Escolher"  />
-                     <input  type="button" name="escolha"  value="Listar"  />
-                     <input  type="button" name="escolha"  value="Status"  />
+                     <button type="button" name="escolha" class="btn btn-success">Finalizar Pedido</button>
+                     
                 </div>
             </div>               
-         
-        
-        </form>
-             </div>   
+                  
 
+        
+        </form> 
+       
          
+             </div>   
+        <div class="col-md-7">
+          <img class="pull-right img-responsive" src="img/cardapiopizza.jpg" alt="Generic placeholder image">
+        </div>
+         </div>
         <%
             String mensagem = request.getParameter("msn");
             if (mensagem != null){
