@@ -205,6 +205,56 @@
             }
         %>
          
+           <div>    <!-- Declaração do formulário -->  
+    <form method="post" target="pagseguro"  
+    action="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html">  
+      
+            <!-- Campos obrigatórios -->  
+            <input name="receiverEmail" value="leandroboka@yahoo.com.br" type="hidden">  
+            <input name="currency" value="BRL" type="hidden">  
+            
+      <% /*
+            String tamanhoP = request.getParameter("tamanho");
+            double preco;
+            if (tamanhoP.equalsIgnoreCase("pequena")){
+                preco = 13;
+        } else if (tamanhoP.equalsIgnoreCase("media")){
+            preco =38;
+        } else if (tamanhoP.equalsIgnoreCase("grande")){
+            preco = 43;} */
+        %> 
+
+            <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
+            <input name="itemId1" value="0001" type="hidden">  
+            <input name="itemDescription1" value="<%request.getParameter("pizza");%>" type="hidden">  <!-- sabor da pizza -->
+            <input name="itemAmount1" value="82.00" type="hidden">  <!-- Preco -->
+            <input name="itemQuantity1" value="1" type="hidden">  
+            <!-- tamanho: precisa ser numerico, entao, vamos comentar por ora-->
+            <!-- <input name="itemWeight1" value=request.getParameter("tamanho") type="hidden"> -->
+            <input name="itemId2" value="0002" type="hidden">  
+            <input name="itemDescription2" value="<% request.getParameter("bebida"); %>" type="hidden">  
+            <input name="itemAmount2" value="6.00" type="hidden">  
+            <input name="itemQuantity2" value="1" type="hidden">             
+      
+            <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+            <input name="reference" value="REF1234" type="hidden">  
+              
+            <!-- Informações de frete (opcionais) -->  
+                  
+            <!-- Dados do comprador (opcionais) -->  
+            <input name="senderName" value="José Comprador" type="hidden">  
+            <input name="senderAreaCode" value="11" type="hidden">  
+            <input name="senderPhone" value="56273440" type="hidden">  
+            <input name="senderEmail" value="jose@mail.com.br" type="hidden">  
+      
+            <!-- submit do form (obrigatório) -->  
+            <div class="container">
+                
+            <input alt="Pague com PagSeguro" name="submit"  type="image"  
+    src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
+              
+            </div>
+    </form>  </div>
        
  <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
