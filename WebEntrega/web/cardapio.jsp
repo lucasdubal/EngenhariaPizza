@@ -55,8 +55,13 @@
     background-attachment: fixed;
     } 
     
-    h3{
+    h3,h4{
         color: whitesmoke;
+    }
+    
+    .pag{
+        margin-left: 50%;
+        float:left;
     }
         
     </style>
@@ -146,9 +151,9 @@
         <form action="TestaPedido">
             <select name="tamanho">
                 <option value="selecionar">Selecionar</option>
-                <option value="pequena">Pekenina</option>
-                <option value="media">Mediazita</option>
-                <option value="grande">Gigante</option>
+                <option value="pequena">PPP</option>
+                <option value="media">Media</option>
+                <option value="grande">Grande</option>
             </select>
             <select name="pizza">
                 <option value="selecionar">Selecionar</option>
@@ -172,19 +177,23 @@
                 <option value="guarana">Guaraná</option>
         </select>
         <h3>Forma de pagamento</h3>
-       <div class="radio">
-      <label><input type="radio" name="optradio">PagSeguro</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio">Presencial</label>
-    </div>
+      <label><input type="radio" name="pagar" value="pagseguro">PagSeguro</label>
+      <label><input type="radio" name="pagar" value="presencial">Presencial</label>
             <div class="container">
                 <div class="row">
                     <br>
                 
-                    <button type="submit" name="escolha" class="btn btn-success" value="Finalizar Pedido">Finalizar Pedido</button>
-                         
-                     
+                    <button type="submit" name="escolha" class="btn btn-success" value="Finalizar Pedido">Finalizar Pedido</button><br><br>
+                    
+                    
+                    
+                    <%
+                        String mensagem=null;
+                        mensagem = request.getParameter("msn");
+                        if (mensagem != null){
+                    %>
+                    <h4><%=mensagem%></h4>
+                    <%}%>
                 </div>
             </div>               
                   
@@ -192,48 +201,41 @@
         
         </form> 
        
-         
-             </div>   
-        <div class="col-md-7">
-          <img class="pull-right img-responsive" src="img/cardapiopizza.jpg" alt="Generic placeholder image">
-        </div>
-         </div>
-        <%
-            String mensagem = request.getParameter("msn");
-            if (mensagem != null){
-                out.print(mensagem);
+                
+        <%  
+            
+            String flag = null;
+            double valorPizza = 0;
+            double valorBebida=0;
+            
+            
+            flag = request.getParameter("flag");
+            
+            if(flag.equalsIgnoreCase("2")){
+                valorPizza = Double.parseDouble(request.getParameter("precop"));
+                valorBebida = Double.parseDouble(request.getParameter("precob"));
             }
-        %>
-         
-           <div>    <!-- Declaração do formulário -->  
+
+        %>  
+                
+        <div>    <!-- Declaração do formulário -->  
     <form method="post" target="pagseguro"  
     action="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html">  
       
             <!-- Campos obrigatórios -->  
             <input name="receiverEmail" value="leandroboka@yahoo.com.br" type="hidden">  
             <input name="currency" value="BRL" type="hidden">  
-            
-      <% /*
-            String tamanhoP = request.getParameter("tamanho");
-            double preco;
-            if (tamanhoP.equalsIgnoreCase("pequena")){
-                preco = 13;
-        } else if (tamanhoP.equalsIgnoreCase("media")){
-            preco =38;
-        } else if (tamanhoP.equalsIgnoreCase("grande")){
-            preco = 43;} */
-        %> 
-
+   
             <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
-            <input name="itemId1" value="0001" type="hidden">  
-            <input name="itemDescription1" value="<%request.getParameter("pizza");%>" type="hidden">  <!-- sabor da pizza -->
-            <input name="itemAmount1" value="82.00" type="hidden">  <!-- Preco -->
+            <input name="itemId1" value="0001" type="hidden">
+            <input name="itemDescription1" value="${param.pizza}" type="hidden">  <!-- sabor da pizza -->
+            <input name="itemAmount1" value="${param.precop}" type="hidden">  <!-- Preco -->
             <input name="itemQuantity1" value="1" type="hidden">  
-            <!-- tamanho: precisa ser numerico, entao, vamos comentar por ora-->
-            <!-- <input name="itemWeight1" value=request.getParameter("tamanho") type="hidden"> -->
+            <!-- tamanho: precisa ser numerico, entao, vamos comentar por ora
+            <input name="itemWeight1" value="${param.tamanho}" type="hidden">-->
             <input name="itemId2" value="0002" type="hidden">  
-            <input name="itemDescription2" value="<% request.getParameter("bebida"); %>" type="hidden">  
-            <input name="itemAmount2" value="6.00" type="hidden">  
+            <input name="itemDescription2" value="${param.bebida}" type="hidden">  
+            <input name="itemAmount2" value="${valorBebida}" type="hidden">  
             <input name="itemQuantity2" value="1" type="hidden">             
       
             <!-- Código de referência do pagamento no seu sistema (opcional) -->  
@@ -250,12 +252,18 @@
             <!-- submit do form (obrigatório) -->  
             <div class="container">
                 
-            <input alt="Pague com PagSeguro" name="submit"  type="image"  
-    src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
+    <input alt="Pague com PagSeguro" class="img-responsive" name="submit"  type="image"  
+    src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif">     
               
             </div>
     </form>  </div>
-       
+         
+             </div>   
+        <div class="col-md-7">
+          <img class="pull-right img-responsive" src="img/cardapiopizza.jpg" alt="Generic placeholder image">
+        </div>
+
+
  <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
