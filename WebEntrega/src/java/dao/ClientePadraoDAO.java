@@ -49,7 +49,7 @@ public class ClientePadraoDAO {
                             this.query.setString(7, p.getSoda().getTipo());
                             this.query.executeUpdate();
                             this.query.close();
-                            mensagem = "Inserido";}
+                        }
                         else {
                             mensagem = "Lista de pedidos está cheia";
                         }
