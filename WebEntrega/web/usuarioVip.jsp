@@ -50,7 +50,7 @@
         label { color: whitesmoke; }
         
      body {
-    background-image: url("img/madeira.jpg");
+    background-image: url("img/background_1.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -138,6 +138,57 @@
       </div>
     </div>
         
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="img/pizza3.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Web Entrega Pizzas</h1>
+              <p> Pizzas Online </p>
+              <p><a class="btn btn-lg btn-primary" href="cardapio.jsp" role="button">Peça a sua!</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="img/pizza2.png" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+                <h1>Web Entrega Pizzas</h1>
+              <p> Pizzas Online </p>
+             <p><a class="btn btn-lg btn-primary" href="cardapio.jsp" role="button">Peça a sua!</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="img/pizza1.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+               <h1>Web Entrega Pizzas</h1>
+              <p> Pizzas Online </p> 
+              <p><a class="btn btn-lg btn-primary" href="cardapio.jsp" role="button">Peça a sua!</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+        
     
      <div class="container marketing" id="vip">  
      <div class="row">
@@ -147,7 +198,7 @@
           <p><button type="button" class="btn btn-danger"> Peça a sua </button></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="img/motoboy.gif" alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="img/moto.jpg" alt="Generic placeholder image" width="140" height="140">
           <h2>Acompanhe sua pizza</h2>
           <p><button type="button" class="btn btn-danger"> Veja agora </button></p>
         </div><!-- /.col-lg-4 -->
@@ -156,15 +207,9 @@
           <h2>Promoções</h2>
           <p><button type="button" class="btn btn-danger"> Aproveite! </button></p>
         </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-   
-        
-        
-        
+      </div><!-- /.row -->       
      </div> 
-        
-        
-        
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
