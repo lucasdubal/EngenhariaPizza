@@ -38,6 +38,30 @@
     
     <link href="css/login.css" rel="stylesheet">
     
+    <style>
+        
+    body {
+    background-image: url("img/background_1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    } 
+    
+    h1,h3,h2,p{
+        color: whitesmoke;
+    }
+    
+    h1{
+         text-align: center;
+    }
+    
+    .form{
+        margin-left: 15%;
+    }
+    
+    
+        
+    </style>
     
   </head>
 <!-- NAVBAR
@@ -111,15 +135,15 @@
     </div>
 
       <div class="container">
- 
-        <h1>Gerenciar Estoque</h1>
-        <form action="EstoqueServlet">
-            <input type="submit" name="acao" value="Numero de Pizzas">
-            <input type="submit" name="acao" value="Numero de Bebidas">
-            <input type="submit" name="acao" value="Adquirir Pizza">
-            <input type="submit" name="acao" value="Adquirir Bebida">
-            <input type="submit" name="acao" value="Utilizar Pizzas">
-            <input type="submit" name="acao" value="Utilizar Bebidas">
+          <br><br>
+          <h1>Gerenciar Estoque</h1><br><br>
+        <form class="form" action="EstoqueServlet">
+            <input type="submit" name ="acao" class="btn btn-danger" value="Numero de Pizzas">
+            <input type="submit" name="acao" class="btn btn-danger" value="Numero de Bebidas">
+            <input type="submit" name="acao"  class="btn btn-danger" value="Adquirir Pizza">
+            <input type="submit" name="acao" class="btn btn-danger" value="Adquirir Bebida">
+            <input type="submit" name="acao" class="btn btn-danger" value="Utilizar Pizzas">
+            <input type="submit" name="acao" class="btn btn-danger" value="Utilizar Bebidas">
         </form>
         
         <%
@@ -132,15 +156,15 @@
                 out.print("");
             }
             if (msn != null){
-                if ((flag.equalsIgnoreCase("1")) || (flag.equalsIgnoreCase("2"))){
-                    out.print(msn);
-                }
-                else if (flag.equalsIgnoreCase("3")){
-                    out.print("Pizzas:"+msn);
-                }
-                else if (flag.equalsIgnoreCase("4")){
-                    out.print ("Bebidas:"+msn);
-                }
+                if ((flag.equalsIgnoreCase("1")) || (flag.equalsIgnoreCase("2"))){%>
+                    <h3><%=msn%></h3>
+                <%}
+                else if (flag.equalsIgnoreCase("3")){%>
+                    <h3>Pizzas: <%=msn%></h3>
+                <%}
+                else if (flag.equalsIgnoreCase("4")){%>
+                    <h3>Bebidas: <%=msn%></h3>
+                <%}
             } else {
                 out.print("");
             }
