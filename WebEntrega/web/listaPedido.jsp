@@ -36,11 +36,31 @@
     <style>
         table{
             
-            padding-top: 100px;
+            padding-top: 400px;
+            color:white;
+        
         }
+     
+        
+        #navbar-wrapper{
+            margin-top:30%;
+        }
+               
+        label { color: whitesmoke; }
+        
+     body {
+    background-image: url("img/background_1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    } 
+    
+    h3,h2,p{
+        color: whitesmoke;
+    }
         
     </style>
-    
+   
     
   </head>
 <!-- NAVBAR
@@ -115,57 +135,64 @@
 
        
         
-        <div class="containder">
+        
         
         <%
+            
             String flag = request.getParameter("flag");
             if (flag.equalsIgnoreCase("1")){    
         %>
 <jsp:useBean id="listapedido" class="dao.ClientePadraoDAO" scope="page"></jsp:useBean> 
-		<table>
+
+        <div class="container" id="texto">
+            
+            <div class="table-responsive">
+		<table class="table">
                     <thead>
                         <tr>
-				<td>Id Pedido</td>
-                                <td>Id Cliente</td>
-				<td>Sabor da Pizza</td>
-				<td>Tamanho</td>
-                                <td>Bebida</td>
-                                <td>Tipo Bebida</td>
-                                <td>Total</td>
-                                <td>Status</td>
-                                <td>Tipo</td>
+				<td style="font-weight: bold;">Id Pedido</td>
+                                <td style="font-weight: bold;">Id Cliente</td>
+				<td style="font-weight: bold;">Sabor da Pizza</td>
+				<td style="font-weight: bold;">Tamanho</td>
+                                <td style="font-weight: bold;">Bebida</td>
+                                <td style="font-weight: bold;">Tipo Bebida</td>
+                                <td style="font-weight: bold;">Total</td>
+                                <td style="font-weight: bold;">Status</td>
+                                <td style="font-weight: bold;">Tipo</td>
 			</tr>
                         <%for(Pedido p:listapedido.listaPedido()){%>
                     </thead>
                      <tr>
-                <td><%=p.getId()%></td>
-                <td><%=p.getCliente().getIdCliente()%></td>
-                <td><%=p.getPizza().getNome()%></td>
-                <td><%=p.getPizza().getTamanho()%></td>
-                <td><%=p.getSoda().getNome()%></td>
-                <td><%=p.getSoda().getTipo()%></td>
-                <td><%=p.getTotal()%></td>
-                <td><%=p.getStatus()%></td>
-                <td><%=p.getCliente().getTipo()%></td>
+                <td style="font-weight: bold;"><%=p.getId()%></td>
+                <td style="font-weight: bold;"><%=p.getCliente().getIdCliente()%></td>
+                <td style="font-weight: bold;"><%=p.getPizza().getNome()%></td>
+                <td style="font-weight: bold;"><%=p.getPizza().getTamanho()%></td>
+                <td style="font-weight: bold;"><%=p.getSoda().getNome()%></td>
+                <td style="font-weight: bold;"><%=p.getSoda().getTipo()%></td>
+                <td style="font-weight: bold;"><%=p.getTotal()%></td>
+                <td style="font-weight: bold;"><%=p.getStatus()%></td>
+                <td style="font-weight: bold;"><%=p.getCliente().getTipo()%></td>
 </tr>
 <%}%>
 		</table>
+            </div>
                 <%
         } else if (flag.equalsIgnoreCase("2")){
 %>
 <jsp:useBean id="listapedido2" class="dao.ClientePadraoDAO" scope="page"></jsp:useBean> 
-		<table>
+        <div class="table-responsive">
+		<table class="table">
                     <thead>
                         <tr>
-				<td>Id Pedido</td>
-                                <td>Id Cliente</td>
-				<td>Sabor da Pizza</td>
-				<td>Tamanho</td>
-                                <td>Bebida</td>
-                                <td>Tipo Bebida</td>
-                                <td>Total</td>
-                                <td>Status</td>
-                                <td>Tipo</td>
+				<td style="font-weight: bold;">Id Pedido</td>
+                                <td style="font-weight: bold;">Id Cliente</td>
+				<td style="font-weight: bold;">Sabor da Pizza</td>
+				<td style="font-weight: bold;">Tamanho</td>
+                                <td style="font-weight: bold;">Bebida</td>
+                                <td style="font-weight: bold;">Tipo Bebida</td>
+                                <td style="font-weight: bold;">Total</td>
+                                <td style="font-weight: bold;">Status</td>
+                                <td style="font-weight: bold;">Tipo</td>
 			</tr>
                         <%for(Pedido p:listapedido2.preferenciarVip()){%>
                     </thead>
@@ -182,10 +209,11 @@
 </tr>
 <%}%>
 		</table>
+                </div>
                 <%
                 }%>
                 <form action="TestaPedido">
-                <input type="submit" name="escolha" value="Preferenciar Vips">
+                <input type="submit" name="escolha" class="btn btn-danger" value="Preferenciar Vips">
                 </form>
 	  
 	  </div>
