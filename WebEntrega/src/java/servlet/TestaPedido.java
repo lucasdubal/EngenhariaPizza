@@ -65,35 +65,50 @@ public class TestaPedido extends HttpServlet {
         Cliente c = new Cliente();
         c.setTipo("p");
         p.setCliente(c);
+        double precob=0, precop=0;;
         
         String acao = request.getParameter("escolha");
         
-        if (acao.equalsIgnoreCase("Escolher")){
+        if (acao.equalsIgnoreCase("Finalizar Pedido")){
             if (tipob.equalsIgnoreCase("lata")){
                 b.setPreco((float) 3.50);
                 b.setNome(nomeb);
                 b.setTipo(tipob);
+                precob = 3.50;
         } else if (tipob.equalsIgnoreCase("2l")){
             b.setPreco((float)6.0);
             b.setNome(nomeb);
             b.setTipo(tipob);
+            precob = 6.00;
         } else{
             b.setPreco(0);
             b.setNome("Nenhuma");
             b.setTipo("Nenhum");}
         if (tamanhop.equals("pequena")){
             pizza.setPreco(22);
+            precop = 22;
         } else if (tamanhop.equalsIgnoreCase("media")){
             pizza.setPreco(27);
+            precop = 27;
         } else if (tamanhop.equalsIgnoreCase("grande")){
-            pizza.setPreco(32);}
+            pizza.setPreco(32);
+            precop = 32;}
         p.setPizza(pizza);
         p.setSoda(b);
         p.setTotal(pizza.getPreco() + b.getPreco());
         try {
             ClientePadraoDAO dao = new ClientePadraoDAO();
             insere = dao.InserePedido(p);
-            String destino = "cardapio.jsp?msn="+insere;
+            if (p.getSoda().getNome().equalsIgnoreCase("Nenhuma")){
+                nomeb = "Nenhuma";
+            }
+            String destino=null;
+            String pgto = request.getParameter("pagar");
+            if (pgto.equalsIgnoreCase("pagseguro")){
+                destino = "cardapio.jsp?flag=2&pizza="+nomep+"&bebida="+nomeb+"&tamanho="+tamanhop+"&precop="+precop+"&precob="+precob+"&msn="+insere;}
+            else if (pgto.equalsIgnoreCase("presencial")){
+                destino = "presencial.jsp";
+            }
             RequestDispatcher rd = request.getRequestDispatcher(destino);
             rd.forward(request, response);
         } catch (Exception e) {
